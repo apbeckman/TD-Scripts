@@ -1,0 +1,19 @@
+def hca():
+    return {
+        "/composition/layers/5/clips/5/video/effects/ascii/effect/scale/behaviour/interval": "0"
+    }
+
+
+def speeds():
+    return {
+        "/composition/speed": "0",
+        "/composition/video/effects/ripples/effect/phase/behaviour/speed": "0",
+        "/composition/video/effects/colourloop/effect/offset/behaviour/speed": "0",
+        "/composition/video/effects/mosaic/effect/posx/behaviour/speed": "0",
+        "/composition/video/effects/mosaic/effect/posy/behaviour/speed": "0",
+        "/composition/video/effects/mosaic2/effect/posx/behaviour/speed": "0",
+        "/composition/video/effects/mosaic2/effect/posy/behaviour/speed": "0",
+        "/composition/video/effects/ripples2/effect/phase/behaviour/speed": "0",
+        "/composition/selectedclip/video/effects/aceflow/effect/speed": "0",
+        "/composition/layers/4/clips/6/video/effects/droste/effect/offset/behaviour/speed": "0",
+    }

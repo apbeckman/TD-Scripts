@@ -1,0 +1,55 @@
+base_path_clip = "/composition/layers/{}/clips/{}/video/effects/{}/effect/{}"
+base_path_clip_source = "/composition/layers/{}/clips/{}/video/source/{}/{}"
+opacity_path_clip = "/composition/layers/{}/clips/{}/video/effects/{}/{}"
+base_path_layer = "/composition/layers/{}/video/effects/{}/effect/{}"
+opacity_path_layer = "/composition/layers/{}/video/effects/{}/{}"
+base_path_comp = "/composition/video/effects/{}/effect/{}"
+opacity_path_comp = "/composition/video/effects/{}/{}"
+
+def clip_fx(effect_dict, clip_index, layer_index):
+    osc_clip = {}
+    for l in layer_index:
+        for c in clip_index:
+            for effect, param_dict in effect_dict.items():
+                for param, value in param_dict.items():
+                    path = base_path_clip if param != "opacity" else opacity_path_clip
+                    address = path.format(l, c, effect, param)
+                    osc_clip[address] = float(value)
+    return osc_clip
+
+def address_generator(effect_dict, clip_index, layer_index):
+    osc_addresses = {}
+    for l in layer_index:
+        for c in clip_index:
+            for source, param_dict in effect_dict.items():
+                for param, value in param_dict.items():
+                    address = base_path_clip_source.format(l, c, source, param)
+                    osc_addresses[address] = float(value)
+    return osc_addresses
+
+def layer_fx(effect_dict, layer_index):
+    osc_layer = {}
+    for l in layer_index:
+        for effect, param_dict in effect_dict.items():
+            for param, value in param_dict.items():
+                path = base_path_layer if param != "opacity" else opacity_path_layer
+                address = path.format(l, effect, param)
+                osc_layer[address] = float(value)
+    return osc_layer
+
+def comp_fx(effect_dict):
+    osc_comp = {}
+    for effect, param_dict in effect_dict.items():
+        for param, value in param_dict.items():
+            path = base_path_comp if effect != "opacity" else opacity_path_comp
+            address = path.format(effect, param)
+            osc_comp[address] = float(value)
+    return osc_comp
+
+def dict_combine(clip_fx, layer_fx, comp_fx):
+    out_dict = {**clip_fx, **layer_fx, **comp_fx}
+    return out_dict
+
+def get_vals(op_list):
+    out_list = [x for oprtr in op_list for x in op(oprtr).chans()]
+    return out_list
